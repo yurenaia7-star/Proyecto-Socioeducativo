@@ -2,65 +2,768 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Re-Acción</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RE-ACCIÓN | De la Pantalla al Ocio Activo</title>
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #eaf7ff, #eaf7ea);
-      text-align: center;
+    :root{
+      --azul:#1e63b5;
+      --azul-osc:#153f73;
+      --verde:#2f8b57;
+      --verde-suave:#eef9f2;
+      --azul-suave:#eef6ff;
+      --texto:#24313c;
+      --gris:#687482;
+      --blanco:#ffffff;
+      --fondo:#f7fbff;
+      --sombra:0 10px 30px rgba(0,0,0,.10);
+      --radio:20px;
+      --max:1180px;
     }
 
-    .container {
-      padding: 40px 20px;
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--texto);
+      background:linear-gradient(135deg,#f6fbff 0%, #eef6ff 35%, #f4fbf4 100%);
+      line-height:1.65;
     }
 
-    img {
-      width: 250px;
-      margin-top: 20px;
+    img{max-width:100%; display:block}
+    a{text-decoration:none; color:inherit}
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(0,0,0,.06);
     }
 
-    h1 {
-      font-size: 42px;
-      color: #1976D2;
-      margin: 20px 0 10px;
+    .nav-inner{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:12px 18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
     }
 
-    p {
-      font-size: 22px;
-      color: #2E7D32;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
     }
 
-    .box {
-      background: white;
-      margin: 40px auto;
-      padding: 25px;
-      border-radius: 15px;
-      max-width: 700px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    .brand img{
+      width:56px;
+      border-radius:12px;
+      background:#fff;
+      padding:4px;
+      box-shadow:0 4px 10px rgba(0,0,0,.08);
+    }
+
+    .brand strong{
+      display:block;
+      color:var(--azul);
+      font-size:1rem;
+    }
+
+    .brand span{
+      display:block;
+      font-size:.88rem;
+      color:var(--gris);
+    }
+
+    .menu{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      font-size:.94rem;
+      color:#314150;
+    }
+
+    .hero{
+      min-height:100vh;
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      color:white;
+      overflow:hidden;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(16,33,61,.54), rgba(16,33,61,.34)),
+        url('presa2.jpeg') center center / cover no-repeat;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:950px;
+      padding:50px 20px;
+    }
+
+    .hero-logo{
+      width:190px;
+      margin:0 auto 25px;
+      background:rgba(255,255,255,.96);
+      padding:14px;
+      border-radius:24px;
+      box-shadow:var(--sombra);
+    }
+
+    .hero h1{
+      margin:0 0 10px;
+      font-size:clamp(2.8rem, 7vw, 5.5rem);
+      line-height:1.02;
+      letter-spacing:.5px;
+    }
+
+    .hero p{
+      margin:0 auto 12px;
+      max-width:760px;
+      font-size:clamp(1rem, 2.1vw, 1.3rem);
+      color:rgba(255,255,255,.95);
+    }
+
+    .hero-badges{
+      margin-top:25px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      justify-content:center;
+    }
+
+    .badge{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.22);
+      font-size:.95rem;
+    }
+
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:34px 18px 70px;
+    }
+
+    .section{
+      background:rgba(255,255,255,.94);
+      border-radius:var(--radio);
+      box-shadow:var(--sombra);
+      padding:30px;
+      margin:0 0 26px;
+    }
+
+    .section h2{
+      margin:0 0 14px;
+      color:var(--azul);
+      font-size:1.9rem;
+    }
+
+    .section h3{
+      margin:26px 0 10px;
+      color:var(--verde);
+      font-size:1.2rem;
+    }
+
+    .section p{
+      margin:0 0 14px;
+      text-align:justify;
+    }
+
+    .lead{
+      font-size:1.06rem;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .three-col{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:16px;
+    }
+
+    .card{
+      border:1px solid rgba(0,0,0,.06);
+      background:linear-gradient(180deg,#ffffff,#f8fbff);
+      border-radius:16px;
+      padding:18px;
+    }
+
+    .card h4{
+      margin:0 0 8px;
+      color:var(--verde);
+      font-size:1.05rem;
+    }
+
+    .note{
+      background:var(--verde-suave);
+      border-left:5px solid var(--verde);
+      padding:14px 16px;
+      border-radius:12px;
+    }
+
+    .image-box img{
+      border-radius:18px;
+      box-shadow:0 8px 22px rgba(0,0,0,.14);
+    }
+
+    ul{
+      margin:10px 0 14px 20px;
+      padding:0;
+    }
+
+    li{margin-bottom:8px}
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:14px;
+      margin-top:14px;
+    }
+
+    .stat{
+      text-align:center;
+      padding:20px 16px;
+      border-radius:16px;
+      background:linear-gradient(180deg,#ffffff,#f4f9ff);
+      border:1px solid rgba(0,0,0,.06);
+    }
+
+    .stat strong{
+      display:block;
+      font-size:1.9rem;
+      color:var(--azul);
+      margin-bottom:4px;
+    }
+
+    .activity{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+      align-items:start;
+      padding:20px 0;
+      border-top:1px solid rgba(0,0,0,.08);
+    }
+
+    .activity:first-of-type{
+      border-top:none;
+      padding-top:0;
+    }
+
+    .meta-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:10px 0 14px;
+    }
+
+    .meta{
+      padding:7px 10px;
+      background:#eef6ff;
+      color:#275c92;
+      border-radius:999px;
+      font-size:.88rem;
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+    }
+
+    .gallery.gallery-4{
+      grid-template-columns:repeat(2,1fr);
+    }
+
+    .gallery img{
+      width:100%;
+      border-radius:14px;
+      object-fit:cover;
+      box-shadow:0 6px 18px rgba(0,0,0,.12);
+    }
+
+    .footer{
+      text-align:center;
+      color:#5f6c78;
+      font-size:.92rem;
+      padding:24px;
+    }
+
+    @media (max-width:1000px){
+      .two-col, .activity, .three-col{
+        grid-template-columns:1fr;
+      }
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width:700px){
+      .nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+      .menu{
+        gap:10px;
+      }
+      .section{
+        padding:22px;
+      }
+      .gallery, .gallery.gallery-4, .stats{
+        grid-template-columns:1fr;
+      }
+      .hero{
+        min-height:82vh;
+      }
+      .hero-logo{
+        width:150px;
+      }
     }
   </style>
 </head>
-
 <body>
 
-<div class="container">
+  <nav class="nav">
+    <div class="nav-inner">
+      <div class="brand">
+        <img src="logo.png" alt="Logo RE-ACCIÓN">
+        <div>
+          <strong>RE-ACCIÓN</strong>
+          <span>De la Pantalla al Ocio Activo</span>
+        </div>
+      </div>
+      <div class="menu">
+        <a href="#introduccion">Introducción</a>
+        <a href="#centro">Centro</a>
+        <a href="#proyecto">Proyecto</a>
+        <a href="#objetivos">Objetivos</a>
+        <a href="#metodologia">Metodología</a>
+        <a href="#actividades">Actividades</a>
+        <a href="#evaluacion">Evaluación</a>
+        <a href="#galeria">Galería</a>
+      </div>
+    </div>
+  </nav>
 
-  <img src="logo.png">
+  <header class="hero">
+    <div class="hero-content">
+      <img src="logo.png" alt="Logo RE-ACCIÓN" class="hero-logo">
+      <h1>RE-ACCIÓN</h1>
+      <p>De la Pantalla al Ocio Activo</p>
+      <p>Proyecto de intervención social desarrollado en la Residencia Escolar Santa María de Guía</p>
+      <div class="hero-badges">
+        <div class="badge">Ocio activo</div>
+        <div class="badge">Convivencia</div>
+        <div class="badge">Patrimonio cultural canario</div>
+        <div class="badge">Niños y niñas de 9 a 12 años</div>
+      </div>
+    </div>
+  </header>
 
-  <h1>RE-ACCIÓN</h1>
-  <p>De la Pantalla al Ocio Activo</p>
+  <main class="wrap">
 
-  <div class="box">
-    <h2>Proyecto Socioeducativo</h2>
-    <p>
-      Este proyecto busca fomentar alternativas de ocio activo,
-      promoviendo el juego, la naturaleza y la interacción social
-      frente al uso excesivo de pantallas.
-    </p>
-  </div>
+    <section class="section" id="introduccion">
+      <h2>Introducción</h2>
+      <div class="two-col">
+        <div>
+          <p class="lead">
+            En la actualidad, el uso excesivo de dispositivos electrónicos genera preocupaciones relacionadas con el desarrollo cognitivo, social y emocional de los niños y las niñas. El acceso temprano y frecuente a las pantallas se asocia a aislamiento social, falta de concentración y aumento del sedentarismo.
+          </p>
+          <p>
+            El proyecto <strong>RE-ACCIÓN: De la Pantalla al Ocio Activo</strong> nace como respuesta a esta realidad en la Residencia Escolar Santa María de Guía, ofreciendo a los niños y las niñas alternativas dinámicas, grupales y saludables para sustituir el tiempo de pantalla por experiencias de juego, movimiento, patrimonio cultural y convivencia positiva.
+          </p>
+          <div class="note">
+            La propuesta se centra especialmente en los niños y las niñas de entre 9 y 12 años, una etapa decisiva para la adquisición de hábitos saludables, habilidades sociales y modelos de ocio más equilibrados.
+          </div>
+        </div>
+        <div class="image-box">
+          <img src="Presa3.jpeg" alt="Entorno natural de la Presa de Las Garzas">
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section class="section" id="centro">
+      <h2>Identificación y contexto del centro</h2>
+      <p>
+        La intervención se desarrolla en la <strong>Residencia Escolar Santa María de Guía</strong>, ubicada en Santa María de Guía. El centro cuenta con espacios educativos, residenciales y de ocio, como comedor, biblioteca, salón de actos, sala de juegos, dormitorios, sala de televisión, jardín exterior y canchas deportivas compartidas.
+      </p>
+      <p>
+        La residencia atiende a menores procedentes de distintos municipios de Gran Canaria y desempeña una función educativa y social clave, proporcionando alojamiento, apoyo académico, atención psicosocial y actividades de ocio y tiempo libre.
+      </p>
+      <h3>Población usuaria</h3>
+      <p>
+        Actualmente, la residencia acoge a 18 menores: 12 niñas y 6 niños, con edades comprendidas entre los 5 y los 15 años. El proyecto se dirige a 10 de esos menores, correspondientes al tramo de 9 a 12 años, por ser una etapa especialmente sensible para trabajar hábitos, convivencia y desarrollo socioemocional.
+      </p>
+      <h3>Necesidades detectadas</h3>
+      <p>
+        A través de la observación directa y de entrevistas, se detectaron necesidades educativas, emocionales, relacionales y de hábitos, además de una clara dependencia de las pantallas como forma de evasión, entretenimiento y regulación emocional. Muchos niños y muchas niñas manifiestan ansiedad ante el aburrimiento, dificultades de concentración y preferencia por el aislamiento digital frente a la interacción real.
+      </p>
+    </section>
+
+    <section class="section" id="proyecto">
+      <h2>Identificación, descripción y justificación del proyecto</h2>
+      <p>
+        <strong>RE-ACCIÓN: De la Pantalla al Ocio Activo</strong> es una propuesta de intervención socioeducativa diseñada para transformar el tiempo libre de los niños y las niñas en una experiencia de crecimiento personal, movimiento, convivencia y bienestar. El proyecto pretende reducir la presencia excesiva de pantallas y ofrecer alternativas atractivas que fortalezcan la interacción social y la salud física y emocional.
+      </p>
+      <p>
+        La justificación del proyecto se apoya en la necesidad de recuperar la infancia, el juego, el contacto directo con iguales y la conexión con el entorno real. Frente a un ocio pasivo y sedentario, se propone un modelo activo que incorpora tradiciones canarias como el Silbo, el Salto del Pastor y el Juego del Palo, integrándolas como herramientas educativas y culturales.
+      </p>
+
+      <div class="three-col">
+        <div class="card">
+          <h4>Problema detectado</h4>
+          <p>Uso excesivo de pantallas, aislamiento social, ansiedad ante el aburrimiento y pérdida de hábitos de ocio activo.</p>
+        </div>
+        <div class="card">
+          <h4>Respuesta educativa</h4>
+          <p>Actividades cooperativas, físicas y patrimoniales para promover salud, convivencia y desconexión digital consciente.</p>
+        </div>
+        <div class="card">
+          <h4>Impacto esperado</h4>
+          <p>Menor sedentarismo, mayor participación social, mejora del clima grupal y refuerzo del bienestar integral.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Fundamentación y marco normativo</h2>
+      <p>
+        El proyecto se apoya en un marco educativo y social que defiende la equidad, la inclusión, el derecho al juego, la promoción del ocio saludable y la prevención de las adicciones comportamentales. La propuesta parte de la urgencia de ofrecer a los niños y las niñas experiencias reales que el mundo virtual no puede sustituir: movimiento, comunicación directa, superación de retos, contacto con el patrimonio y construcción de vínculos significativos.
+      </p>
+    </section>
+
+    <section class="section" id="objetivos">
+      <h2>Finalidad, objetivos y destinatarios</h2>
+
+      <div class="three-col">
+        <div class="card">
+          <h4>Finalidad</h4>
+          <p>Impulsar un cambio progresivo en la cultura de ocio de la residencia hacia prácticas activas, conscientes, saludables e inclusivas.</p>
+        </div>
+        <div class="card">
+          <h4>Destinatarios</h4>
+          <p>10 niños y niñas de entre 9 y 12 años residentes en la Residencia Escolar Santa María de Guía.</p>
+        </div>
+        <div class="card">
+          <h4>Enfoque general</h4>
+          <p>Intervención socioeducativa, preventiva, activa, vivencial e igualitaria, centrada en la experiencia y en la participación real.</p>
+        </div>
+      </div>
+
+      <h3>Objetivo general</h3>
+      <p>
+        Promover hábitos de ocio activo que contribuyan a reducir el uso excesivo de pantallas, mejorando el bienestar físico, social y emocional de los niños y las niñas mediante la práctica de actividades físicas y el descubrimiento del patrimonio cultural de Canarias.
+      </p>
+
+      <h3>Objetivos específicos</h3>
+      <ul>
+        <li>Reducir de forma gradual el tiempo dedicado al uso de pantallas.</li>
+        <li>Fomentar la participación activa a través de actividades lúdicas y cooperativas.</li>
+        <li>Prevenir situaciones de aislamiento social.</li>
+        <li>Potenciar actividades físicas adaptadas a la edad.</li>
+        <li>Sensibilizar sobre los efectos del uso excesivo de pantallas.</li>
+        <li>Establecer rutinas de ocio estructurado que mejoren la convivencia.</li>
+        <li>Promover el conocimiento y la valoración del patrimonio cultural de Canarias.</li>
+      </ul>
+    </section>
+
+    <section class="section" id="metodologia">
+      <h2>Metodología de intervención</h2>
+      <p>
+        La propuesta se basa en una metodología <strong>activa, participativa, vivencial e inclusiva</strong>, donde los niños y las niñas son protagonistas de su proceso de aprendizaje. La intervención se construye desde la experiencia directa, el trabajo en grupo, la reflexión sobre los hábitos digitales y la participación en actividades significativas alejadas del uso de pantallas.
+      </p>
+
+      <div class="three-col">
+        <div class="card">
+          <h4>Desafío físico y sensorial</h4>
+          <p>El Salto del Pastor y el Juego del Palo favorecen equilibrio, conciencia corporal y gestión del riesgo controlado.</p>
+        </div>
+        <div class="card">
+          <h4>Comunicación analógica</h4>
+          <p>El Silbo trabaja escucha activa, atención, paciencia y procesamiento auditivo sin apoyo visual.</p>
+        </div>
+        <div class="card">
+          <h4>Aprendizaje basado en retos</h4>
+          <p>Las sesiones se organizan por niveles de dificultad para reforzar motivación, implicación y logro.</p>
+        </div>
+        <div class="card">
+          <h4>Valor patrimonial</h4>
+          <p>Las tradiciones canarias fortalecen identidad, pertenencia y conexión con el entorno.</p>
+        </div>
+        <div class="card">
+          <h4>Seguridad y responsabilidad</h4>
+          <p>El respeto y el cuidado mutuo se trabajan como base para todas las dinámicas.</p>
+        </div>
+        <div class="card">
+          <h4>Igualdad y valores</h4>
+          <p>Se promueve la participación de niños y niñas en igualdad, junto con cooperación, empatía y convivencia positiva.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="actividades">
+      <h2>Plan de actividades</h2>
+
+      <article class="activity">
+        <div>
+          <h3>Actividad 1 · Presentación y concienciación</h3>
+          <div class="meta-row">
+            <span class="meta">Edad: 9-12 años</span>
+            <span class="meta">Participantes: 10</span>
+            <span class="meta">Duración: 30 min</span>
+            <span class="meta">Espacio: Patio exterior</span>
+          </div>
+          <p>
+            El proyecto comienza con una dinámica de reflexión sobre el uso de pantallas y el tiempo libre. Los niños y las niñas se posicionan físicamente entre dos carteles según se sientan identificados con una afirmación u otra, lo que facilita la toma de conciencia, el intercambio de opiniones y la reflexión grupal sin juicios. La actividad finaliza con la elaboración de un decálogo de normas de convivencia del proyecto.
+          </p>
+        </div>
+        <div class="gallery">
+          <img src="cartel1.jpeg" alt="Cartel sobre uso de pantallas">
+          <img src="cartel2.jpeg" alt="Cartel sobre otras formas de ocio">
+          <img src="decalogo.jpeg" alt="Decálogo del proyecto">
+        </div>
+      </article>
+
+      <article class="activity">
+        <div>
+          <h3>Actividad 2 · Taller de Silbo</h3>
+          <div class="meta-row">
+            <span class="meta">Edad: 9-12 años</span>
+            <span class="meta">Duración: 60 min aprox.</span>
+            <span class="meta">Varias sesiones</span>
+            <span class="meta">Salón de actos y patio</span>
+          </div>
+          <p>
+            El taller de Silbo introduce a los niños y las niñas en una manifestación singular del patrimonio canario. Combina historia, técnica, respiración, identificación de sonidos y juegos prácticos para favorecer escucha, concentración, paciencia y aprendizaje cooperativo.
+          </p>
+        </div>
+        <div class="gallery">
+          <img src="silbo1.jpeg" alt="Taller de Silbo">
+          <img src="silbo2.jpeg" alt="Práctica de Silbo">
+          <img src="silbo3.jpeg" alt="Juego de Silbo">
+        </div>
+      </article>
+
+      <article class="activity">
+        <div>
+          <h3>Actividad 3 · Taller de Salto del Pastor</h3>
+          <div class="meta-row">
+            <span class="meta">Edad: 9-12 años</span>
+            <span class="meta">Duración: 60 min aprox.</span>
+            <span class="meta">Varias sesiones</span>
+            <span class="meta">Patio y senderos</span>
+          </div>
+          <p>
+            En esta actividad se trabajan el origen del Salto del Pastor, las partes del garrote, las normas de seguridad y las técnicas básicas de apoyo, equilibrio, brinco y desplazamiento. Se plantea como una experiencia progresiva y adaptada, donde cada niño y cada niña puede avanzar según sus posibilidades.
+          </p>
+        </div>
+        <div class="gallery">
+          <img src="Salto1.jpeg" alt="Salto del Pastor 1">
+          <img src="Salto2.jpeg" alt="Salto del Pastor 2">
+          <img src="Salto3.jpeg" alt="Salto del Pastor 3">
+        </div>
+      </article>
+
+      <article class="activity">
+        <div>
+          <h3>Actividad 4 · Taller de Juego del Palo</h3>
+          <div class="meta-row">
+            <span class="meta">Edad: 9-12 años</span>
+            <span class="meta">Duración: 60 min aprox.</span>
+            <span class="meta">Varias sesiones</span>
+            <span class="meta">Patio exterior</span>
+          </div>
+          <p>
+            El Juego del Palo se presenta como una práctica tradicional que combina coordinación, respeto, atención y confianza. Los niños y las niñas aprenden historia, posición de guardia, desplazamientos y secuencias básicas por parejas, finalizando con una reflexión sobre las emociones vividas y la cooperación.
+          </p>
+        </div>
+        <div class="gallery">
+          <img src="Palo1.jpeg" alt="Juego del Palo 1">
+          <img src="Palo2.jpeg" alt="Juego del Palo 2">
+          <img src="Palo3.jpeg" alt="Juego del Palo 3">
+        </div>
+      </article>
+
+      <article class="activity">
+        <div>
+          <h3>Actividad 5 · Salida a la Presa de Las Garzas</h3>
+          <div class="meta-row">
+            <span class="meta">Edad: 9-12 años</span>
+            <span class="meta">Duración: 2 horas aprox.</span>
+            <span class="meta">Entorno natural</span>
+            <span class="meta">Salida final</span>
+          </div>
+          <p>
+            La salida a la Presa de Las Garzas integra senderismo, educación ambiental, observación de la flora, merienda compartida y actividades en la naturaleza. Es una experiencia de convivencia, movimiento y desconexión digital en un contexto natural cercano y significativo.
+          </p>
+        </div>
+        <div class="gallery gallery-4">
+          <img src="Presa1.jpeg" alt="Presa 1">
+          <img src="presa2.jpeg" alt="Presa 2">
+          <img src="Presa3.jpeg" alt="Presa 3">
+          <img src="presa5.jpeg" alt="Presa 5">
+        </div>
+      </article>
+    </section>
+
+    <section class="section">
+      <h2>Localización y temporalización</h2>
+      <p>
+        El proyecto se desarrolla principalmente en la Residencia Escolar Santa María de Guía, utilizando espacios interiores y exteriores, y se complementa con la salida al entorno natural de la Presa de Las Garzas.
+      </p>
+      <p>
+        La duración total del proyecto es de dos meses, con un total de nueve sesiones distribuidas entre las distintas actividades y una sesión de consolidación.
+      </p>
+
+      <div class="stats">
+        <div class="stat">
+          <strong>2</strong>
+          <span>meses</span>
+        </div>
+        <div class="stat">
+          <strong>9</strong>
+          <span>sesiones</span>
+        </div>
+        <div class="stat">
+          <strong>10</strong>
+          <span>participantes</span>
+        </div>
+        <div class="stat">
+          <strong>5</strong>
+          <span>actividades clave</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Recursos y presupuesto</h2>
+      <h3>Recursos humanos</h3>
+      <ul>
+        <li>Integrador o integradora social responsable de la planificación, coordinación y acompañamiento.</li>
+        <li>Monitores y monitoras de apoyo para dinamización y supervisión.</li>
+        <li>Profesionales colaboradores especialistas en actividades tradicionales canarias.</li>
+        <li>Equipo educativo de la residencia para coordinación general y apoyo organizativo.</li>
+      </ul>
+
+      <h3>Recursos materiales</h3>
+      <ul>
+        <li>Material fungible: cartulinas, lápices, gomas, rotuladores, tizas, folios y cinta adhesiva.</li>
+        <li>Material no fungible: pizarra, ordenador, aros, garrotes, palos y cronómetro.</li>
+      </ul>
+
+      <h3>Presupuesto</h3>
+      <p>
+        El presupuesto total estimado del proyecto asciende a <strong>1.614 €</strong>, incluyendo personal educativo, monitor colaborador, materiales y seguro de actividad.
+      </p>
+    </section>
+
+    <section class="section" id="evaluacion">
+      <h2>Evaluación del proyecto</h2>
+      <p>
+        La evaluación se concibe como un proceso continuo, con tres momentos principales: evaluación inicial, evaluación durante el proceso y evaluación final. Se emplean entrevistas, observación directa, diario de campo, carnet de logros, dinámicas de cierre de sesión, cuestionario final y asambleas grupales.
+      </p>
+
+      <h3>Indicadores de evaluación</h3>
+      <ul>
+        <li>Participación activa de los niños y las niñas en las actividades.</li>
+        <li>Disminución del tiempo dedicado al uso de pantallas.</li>
+        <li>Mejora de la interacción social.</li>
+        <li>Reducción de conflictos y mejora del clima de convivencia.</li>
+        <li>Adquisición de habilidades físicas básicas.</li>
+        <li>Interés por el patrimonio cultural trabajado.</li>
+        <li>Grado de satisfacción con el proyecto.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>Análisis de riesgos</h2>
+      <div class="three-col">
+        <div class="card">
+          <h4>Riesgos físicos del personal</h4>
+          <p>Sobreesfuerzos, preparación de materiales y pequeños accidentes en la organización de espacios.</p>
+        </div>
+        <div class="card">
+          <h4>Riesgos psicosociales</h4>
+          <p>Estrés o sobrecarga emocional derivados de la gestión de grupo y de conflictos puntuales.</p>
+        </div>
+        <div class="card">
+          <h4>Riesgos para los niños y las niñas</h4>
+          <p>Caídas, golpes, mal uso del material, riesgos del entorno natural, frustración, timidez o conflictos grupales.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Conclusiones</h2>
+      <p>
+        RE-ACCIÓN demuestra que el ocio activo puede convertirse en una herramienta educativa clave para promover hábitos de vida saludables, mejorar la convivencia y contribuir al bienestar físico, social y emocional de los niños y las niñas.
+      </p>
+    </section>
+
+    <section class="section" id="galeria">
+      <h2>Galería del proyecto</h2>
+
+      <h3>Actividad 1 · Concienciación</h3>
+      <div class="gallery">
+        <img src="cartel1.jpeg" alt="Cartel 1">
+        <img src="cartel2.jpeg" alt="Cartel 2">
+        <img src="decalogo.jpeg" alt="Decálogo">
+      </div>
+
+      <h3>Actividad 2 · Silbo</h3>
+      <div class="gallery">
+        <img src="silbo1.jpeg" alt="Silbo 1">
+        <img src="silbo2.jpeg" alt="Silbo 2">
+        <img src="silbo3.jpeg" alt="Silbo 3">
+      </div>
+
+      <h3>Actividad 3 · Salto del Pastor</h3>
+      <div class="gallery">
+        <img src="Salto1.jpeg" alt="Salto 1">
+        <img src="Salto2.jpeg" alt="Salto 2">
+        <img src="Salto3.jpeg" alt="Salto 3">
+      </div>
+
+      <h3>Actividad 4 · Juego del Palo</h3>
+      <div class="gallery">
+        <img src="Palo1.jpeg" alt="Palo 1">
+        <img src="Palo2.jpeg" alt="Palo 2">
+        <img src="Palo3.jpeg" alt="Palo 3">
+      </div>
+
+      <h3>Actividad 5 · Salida a la Presa de Las Garzas</h3>
+      <div class="gallery gallery-4">
+        <img src="Presa1.jpeg" alt="Presa 1">
+        <img src="presa2.jpeg" alt="Presa 2">
+        <img src="Presa3.jpeg" alt="Presa 3">
+        <img src="presa5.jpeg" alt="Presa 5">
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    Proyecto RE-ACCIÓN · Residencia Escolar Santa María de Guía · Intervención socioeducativa
+  </footer>
 
 </body>
 </html>
